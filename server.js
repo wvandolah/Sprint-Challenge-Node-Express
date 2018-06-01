@@ -167,4 +167,15 @@ server.put('/api/project/:id', (req, res) => {
     })
 })
 
+server.get('/api/project/:id/actions', (req, res) => {
+  const { id } = req.params;
+  projectDb.getProjectActions(id)
+    .then(action => {      
+      res.json(action)
+    })    
+    .catch( error => {
+      sendUserError(500, "error that is not a user", res)
+    })
+})
+
 server.listen(port, () => console.log(`server running on port ${port}`))
